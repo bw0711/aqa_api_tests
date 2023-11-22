@@ -1,0 +1,10 @@
+{
+    "newUser": {
+      "firstname": "{{firstName}}",
+      "lastname": "{{lastName}}",
+      "username": "{{userName}}",
+      "password": "{{password}}",
+      "confirmPassword": "{{password}}",
+      "gender": "{{gender}}"
+    }
+  }
