@@ -28,7 +28,6 @@ module.exports = defineConfig({
   env: {
     USERNAME: process.env.USERNAME,
     PASSWORD: process.env.PASSWORD,
-    USERID: process.env.USERID,
-    BOOKID: process.env.BOOKID
+    USERID: process.env.USERID
   }
 });
