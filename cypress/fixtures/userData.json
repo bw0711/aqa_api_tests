@@ -6,8 +6,5 @@
       "password": "{{password}}",
       "confirmPassword": "{{password}}",
       "gender": "{{gender}}"
-    },
-    "books": {
-      "bookId": 2
     }
   }
