@@ -1,0 +1,4 @@
+{
+    "baseUrl":"https://bookcart.azurewebsites.net/api",
+    "specPattern":"cypress/e2e/bookCart/*/*/*.cy.js"
+}

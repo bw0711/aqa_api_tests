@@ -1,4 +1,4 @@
-import { UsersData } from "../../support/pages/api/users";
+import { UsersData } from "../../../../support/pages/api/users";
 const user = new UsersData;
 
 describe("Register a new user", () => {

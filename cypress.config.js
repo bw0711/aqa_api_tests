@@ -4,15 +4,30 @@ require("dotenv").config();
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
+      const environmentName = config.env.environmentName || 'bookcart'
+      const environmentFilename = `./${environmentName}.settings.json`
+      const settings = require(environmentFilename)
+      if (settings.baseUrl) {
+        config.baseUrl = settings.baseUrl
+      }
+      if (settings.specPattern){
+        config.specPattern = settings.specPattern
+      }
+      if (settings.env) {
+        config.env = {
+          ...config.env,
+          ...settings.env,
+        }
+      }
+      return config
     },
     fixturesFolder: "cypress/fixtures",
     viewportHeight: 1080,
     viewportWidth: 1920
   },
   env: {
-    loginBaseUrl: "https://bookcart.azurewebsites.net/api/login",
-    registerBaseUrl: "https://bookcart.azurewebsites.net/api/user",
     USERNAME: process.env.USERNAME,
-    PASSWORD: process.env.PASSWORD
+    PASSWORD: process.env.PASSWORD,
+    USERID: process.env.USERID
   }
 });

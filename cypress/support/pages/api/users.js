@@ -1,19 +1,18 @@
 /// <reference types= "cypress" />
 import { UserHelpers } from "../../helpers/user.helpers";
+import { Wishlist } from "../api/wishlist";
 const helpers = new UserHelpers();
 
 export class UsersData {
+    #wishedBook = new Wishlist();
 
     registerNewUser() {
-
         cy.fixture("userData").then((userData) => {
             userData.newUser = helpers.generateUserData();
             cy.request({
                 method: "POST",
-                url: helpers.registerBaseUrl,
+                url: "/user",
                 body: userData.newUser,
-            }).then((response) => {
-                expect(response.status).to.eq(200);
             })
         })
     }
@@ -24,12 +23,16 @@ export class UsersData {
             password: helpers.password
         };
 
-        cy.request({
+        return cy.request({
             method: "POST",
-            url: helpers.loginBaseUrl,
+            url: "/login",
             body: loginData
-        }).then((response) => {
-            expect(response.status).to.eq(200);
+        }).its('body').then((body) => {
+            expect(body).to.have.property('token');
+            Cypress.env('userToken', body.token);
+            process.env.USER_TOKEN = body.token;
+
+            this.#wishedBook.setUserToken(body.token);
         });
     }
 }
