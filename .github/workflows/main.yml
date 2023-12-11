@@ -33,17 +33,17 @@ jobs:
       - name: Run tests
         run: npm run cy:run:bookcart
         
-      - name: Generate report
+      - name: Generate mochawesome report
         run: npm run generate:report
         if: always()
-        
-      - name: Upload report
+
+      - name: Save report
         uses: actions/upload-artifact@v3
         with:
-          name: Test report
           path: mochawesome-report
+          name: Test report
         if: always()
-        
+
       - name: Save report
         uses: actions/download-artifact@v3
         with:
