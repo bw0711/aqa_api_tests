@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 require("dotenv").config();
 
 module.exports = defineConfig({
+  projectId: "",
   e2e: {
     setupNodeEvents(on, config) {
       const environmentName = config.env.environmentName || 'bookcart'
@@ -28,6 +29,13 @@ module.exports = defineConfig({
   env: {
     USERNAME: process.env.USERNAME,
     PASSWORD: process.env.PASSWORD,
-    USERID: process.env.USERID
-  }
+    USERID: process.env.USERID,
+  },
+  reporter: 'mochawesome',
+  reporterOptions: {
+    reportDir: 'cypress/results',
+    overwrite: true,
+    html: true,
+    json: true,
+  },
 });
