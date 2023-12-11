@@ -42,7 +42,7 @@ jobs:
           name: Test report
         if: always()
 
-      - name: Save report
+      - name: Download report
         uses: actions/download-artifact@v3
         with:
           name: Test report
