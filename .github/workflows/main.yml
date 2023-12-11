@@ -1,5 +1,5 @@
 env:
-  CYPRESS_ID:${{secrets.CYPRESS_ID}}
+  CYPRESS_ID: ${{ secrets.CYPRESS_ID }}
 
 name: Trigger BookCart cypress tests
 on: 
@@ -8,23 +8,37 @@ on:
     branches:
       - main
   pull_request:
-    types:  [opened, assigned, reopened]
+    types: [opened, assigned, reopened]
+
 jobs:
   testing:
-    runs-on:  ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Export env variables
-        run:  export CYPRESS_ID = ${{secrets.CYPRESS_ID}}
+        run: export CYPRESS_ID="${{ secrets.CYPRESS_ID }}"
+        
       - name: Get repository code
         uses: actions/checkout@v4
+        
       - name: Install dependencies
-        run:  npm ci
+        run: npm ci
+        
       - name: Run tests
-        run:  npm run cy:run:bookcart
+        run: npm run cy:run:bookcart
+        
       - name: Generate report
-        run:  npm run generate:rport
+        run: npm run generate:report
+        if: always()
+        
       - name: Upload report
         uses: actions/upload-artifact@v3
         with:
           name: Cypress-results
           path: cypress/results
+        if: always()
+        
+      - name: Save report
+        uses: actions/download-artifact@v3
+        with:
+          name: Test report
+        if: always()
