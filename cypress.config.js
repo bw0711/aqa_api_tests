@@ -29,5 +29,12 @@ module.exports = defineConfig({
     USERNAME: process.env.USERNAME,
     PASSWORD: process.env.PASSWORD,
     USERID: process.env.USERID
-  }
+  },
+  reporter: 'mochawesome',
+  reporterOptions: {
+    reportDir: 'cypress/results',
+    overwrite: false,
+    html: true,
+    json: true,
+  },
 });
