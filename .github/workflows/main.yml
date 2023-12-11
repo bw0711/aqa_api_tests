@@ -3,6 +3,7 @@ env:
   USERNAME: ${{ secrets.USERNAME }}
   PASSWORD: ${{ secrets.PASSWORD }}
   USERID: ${{ secrets.USERID }}
+  RECORD_KEY: ${{ secrets.RECORD_KEY }}
 
 name: Trigger BookCart cypress tests
 on: 
@@ -16,17 +17,11 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node-18.15.0-chrome-106.0.5249.61-1-ff-99.0.1-edge-114.0.1823.51-1
-      options: --user 1001
     strategy:
       fail-fast: false
       matrix:
         containers: [1, 2]
     steps:
-      - name: Export env variables
-        run: export CYPRESS_ID="${{ secrets.CYPRESS_ID }}"
-        
       - name: Get repository code
         uses: actions/checkout@v4
         
@@ -34,7 +29,7 @@ jobs:
         run: npm ci
         
       - name: Run tests
-        run: npm run cy:run:bookcart -- --env USERNAME=${{ secrets.USERNAME }} --env PASSWORD=${{ secrets.PASSWORD }} --env USERID=${{ secrets.USERID }}
+        run: npm run cy:run:bookcart -- --env USERNAME=${{ secrets.USERNAME }} --env PASSWORD=${{ secrets.PASSWORD }} --env USERID=${{ secrets.USERID }} --record
         
       - name: Generate mochawesome report
         run: npm run generate:report
