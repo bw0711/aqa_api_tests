@@ -12,7 +12,7 @@
     "generate:report": "npx mochawesome-merge \"cypress/results/*.json\" > mochawesome.json && npx marge mochawesome.json"
   },
   "author": "Ivan Yeremenko",
-  "license": "ISC",
+  "license": "",
   "dependencies": {
     "@faker-js/faker": "^8.3.1",
     "cypress": "^13.6.0",
