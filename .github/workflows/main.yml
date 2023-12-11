@@ -13,6 +13,8 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node-18.15.0-chrome-106.0.5249.61-1-ff-99.0.1-edge-114.0.1823.51-1
     steps:
       - name: Export env variables
         run: export CYPRESS_ID="${{ secrets.CYPRESS_ID }}"
@@ -33,8 +35,8 @@ jobs:
       - name: Upload report
         uses: actions/upload-artifact@v3
         with:
-          name: Cypress-results
-          path: cypress/results
+          name: Test report
+          path: mochawesome-report
         if: always()
         
       - name: Save report
