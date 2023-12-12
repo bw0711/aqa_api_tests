@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 require("dotenv").config();
 
 module.exports = defineConfig({
-  projectId: "arrr4h",
+  projectId: process.env.PROJECT_ID,
   e2e: {
     setupNodeEvents(on, config) {
       const environmentName = config.env.environmentName || 'bookcart'
