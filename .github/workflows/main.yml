@@ -2,6 +2,7 @@ env:
   USERNAME: ${{ secrets.USERNAME }}
   PASSWORD: ${{ secrets.PASSWORD }}
   USERID: ${{ secrets.USERID }}
+  CYPRESS_ID: ${{ secrets.CYPRESS_ID }}
 
 name: Trigger BookCart cypress tests
 on: 
@@ -27,7 +28,7 @@ jobs:
         run: npm ci
         
       - name: Run tests
-        run: npm run cy:run:bookcart -- --env USERNAME=${{ secrets.USERNAME }} --env PASSWORD=${{ secrets.PASSWORD }} --env USERID=${{ secrets.USERID }} --record --key=${{ secrets.RECORD_KEY }}
+        run: npm run cy:run:bookcart -- --env USERNAME=${{ secrets.USERNAME }} --env PASSWORD=${{ secrets.PASSWORD }} --env USERID=${{ secrets.USERID }} --env projectId=${{ secrets.CYPRESS_ID }} --record --key=${{ secrets.RECORD_KEY }}
         
       - name: Generate mochawesome report
         run: npm run generate:report
