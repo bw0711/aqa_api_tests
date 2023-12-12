@@ -22,12 +22,13 @@ jobs:
         run: npm ci
         
       - name: Run tests
+        shell:  bash
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           USERID: ${{ secrets.USERID }}
           CYPRESS_ID: ${{ secrets.CYPRESS_ID }}
-        run: npm run cy:run:bookcart -- --record --key=${{ secrets.RECORD_KEY }}
+        run: exit 1
         
       - name: Generate mochawesome report
         run: npm run generate:report
