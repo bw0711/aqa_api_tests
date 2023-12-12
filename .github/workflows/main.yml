@@ -23,21 +23,21 @@ jobs:
         run: npm ci
         
       - name: Run tests
-        run: npm run cy:run:bookcart -- --env USERNAME=${{ secrets.USERNAME }} --env PASSWORD=${{ secrets.PASSWORD }} --env USERID=${{ secrets.USERID }} --env projectId=${{ secrets.CYPRESS_ID }} --record --key=${{ secrets.RECORD_KEY }}
+        run: npm run cy:run:bookcart -- --env USERNAME=${{ secrets.USERNAME }} --env PASSWORD=${{ secrets.PASSWORD }} --env USERID=${{ secrets.USERID }} --record --key=${{ secrets.RECORD_KEY }}
         
       - name: Generate mochawesome report
         run: npm run generate:report
-        if: always()
+        if: success()
 
       - name: Save report
         uses: actions/upload-artifact@v3
         with:
           path: mochawesome-report
           name: Test report
-        if: always()
+        if: success()
 
       - name: Download report
         uses: actions/download-artifact@v3
         with:
           name: Test report
-        if: always()
+        if: success()
