@@ -1,3 +1,8 @@
+env:
+  USERNAME: ${{ secrets.USERNAME }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  USERID: ${{ secrets.USERID }}
+  CYPRESS_ID: ${{ secrets.CYPRESS_ID }}
 
 name: Trigger BookCart cypress tests
 on: 
